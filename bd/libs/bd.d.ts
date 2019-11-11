@@ -847,7 +847,7 @@ interface _showModalObject {
   /**
    * 是否显示取消按钮，默认为 true
    */
-  showCancel: boolean;
+  showCancel?: boolean;
 
   /**
    * 取消按钮的文字，默认为"取消"，最多 4 个字符
@@ -857,17 +857,17 @@ interface _showModalObject {
   /**
    * 取消按钮的文字颜色，默认为"#000000"
    */
-  cancelColor: any;
+  cancelColor?: any;
 
   /**
    * 确定按钮的文字，默认为"确定"，最多 4 个字符
    */
-  confirmText: string;
+  confirmText?: string;
 
   /**
    * 确定按钮的文字颜色，默认为"#3CC51F"
    */
-  confirmColor: any;
+  confirmColor?: any;
 
   /**
    * 接口调用成功的回调函数
@@ -4657,7 +4657,7 @@ declare function Page(page: PageOptions): void;
 
 declare function getCurrentPages(): object[];
 
-declare namespace wx {
+declare namespace swan {
   /**
    * 批量添加卡券。
    */
@@ -5648,7 +5648,7 @@ declare namespace wx {
   export function offShow()
   export function offHide()
   export function offNetworkStatusChange(cb: Function)
-  export function exitMiniProgram(obj)
+  export function exit(obj)
   export function onShareAppMessage(func)
   export function getLaunchOptionsSync()
   export function onAudioInterruptionBegin(func)
@@ -5656,7 +5656,6 @@ declare namespace wx {
   export function triggerGC()
   export function createBannerAd(params): any
   export function createRewardedVideoAd(params): any
-  export function createInterstitialAd(params): any
   export function setUserCloudStorage(params)
   export function openCustomerServiceConversation()
   export function createUserInfoButton(p: WXUserInfoButtonObject): WXUserInfoButton

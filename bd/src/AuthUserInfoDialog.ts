@@ -51,7 +51,7 @@ export default class AuthUserInfoDialog extends Laya.Dialog {
             fontSize: 24,
             lineHeight: 10
         }
-        let button = wx.createUserInfoButton({
+        let button = swan.createUserInfoButton({
             type: 'image',
             image: 'local/auth/button.png',
             style: style,

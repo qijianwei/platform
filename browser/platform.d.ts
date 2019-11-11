@@ -314,6 +314,7 @@ interface BannerAd {
     onError(listener)
     /**取消监听 banner 广告错误事件 */
     offError(listener)
+    listenerError : Function
 }
 interface RewardedVideoAdObject {
     /**广告单元 id */
@@ -336,6 +337,7 @@ interface RewardedVideoAd {
     onClose(listener)
     /**取消监听用户点击 关闭广告 按钮的事件 */
     offClose(listener)
+    listenerError : Function
 }
 interface InterstitialAdObject {
     /**广告单元 id */

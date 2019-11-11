@@ -1,31 +1,50 @@
+import AuthManager from "./AuthManager"
+import AuthUserInfoDialog from "./AuthUserInfoDialog";
+
 export default class LoginManager {
 
     static login(params: LoginObject, cb) {
         //获取微信code，这是必须操作
         this.getCode(res => {
             let code = res.code
+            //获取授权信息，必须经过用户授权才可以获取到用户个人信息
             cb({
                 type: 5,
-                platform: 5,
+                platform: 6,
                 js_code: code,
-                device_info: wx.getSystemInfoSync(),
+                device_info: swan.getSystemInfoSync(),
             })
+                    
         })
     }
     /**
-    * 调用微信登录
+    * 调用百度登录,和微信不同
     */
     static getCode(cb) {
-        wx.login({
-            success(res) {
+        swan.login({
+            success:res=> {
                 cb && cb(res);
             },
-            fail() { }
+            fail:function() { 
+                swan.showModal({
+                    title: "登录失败",
+                    content: "是否重新登录？",
+                    cancelText: "退出游戏",
+                    success: res => {
+                        if (res.confirm) {
+                            LoginManager.getCode(cb);
+                        }
+                        else if (res.cancel) {
+                            swan.exit({});
+                        }
+                    }
+                })
+            }
         })
     }
   
     static checkSession(o) {
-        wx.checkSession({
+        swan.checkSession({
             success() {
                 o.success && o.success()
             },
@@ -36,7 +55,7 @@ export default class LoginManager {
     }
     /**调用微信获取用户信息接口 */
     static getUserInfo(cb) {
-        wx.getUserInfo({
+        swan.getUserInfo({
             withCredentials: true,
             lang: "zh_CN",
             success(res) {
@@ -47,7 +66,7 @@ export default class LoginManager {
     }
 
     static getUserInfoWithoutCredentials(cb) {
-        wx.getUserInfo({
+        swan.getUserInfo({
             lang: "zh_CN",
             withCredentials: false,
             success(res) {
@@ -72,6 +91,6 @@ export default class LoginManager {
             },
             fail() { }
         }
-        wx.showModal(params)
+        swan.showModal(params)
     }
 }

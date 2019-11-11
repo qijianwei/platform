@@ -8,19 +8,14 @@ import InterstitialAd from "./InterstitialAd";
 
 export default class Platform implements PlatformInterface {
     init() {
-        wx.updateShareMenu({
-            withShareTicket: true,
-            success() { },
-            fail() { }
-        })
-        wx.showShareMenu({
+        swan.showShareMenu({
             withShareTicket: true,
             success() { },
             fail() { }
         })
     }
     getLaunchOptionsSync() {
-        return wx.getLaunchOptionsSync()
+        return swan.getLaunchOptionsSync()
     }
 
     login(params, cb) {
@@ -33,44 +28,44 @@ export default class Platform implements PlatformInterface {
         return true
     }
     getUserInfo(p){
-        wx.getUserInfo(p)
+        swan.getUserInfo(p)
     }
 
     /**生命周期 */
     onShow(cb) {
         /**@warn 这里可能需要针对第一次进行过滤 */
-        wx.onShow(cb)
+        swan.onShow(cb)
     }
     offShow() {
-        wx.offShow()
+        swan.offShow()
     }
     onHide(cb) {
-        wx.onHide(cb)
+        swan.onHide(cb)
     }
     offHide() {
-        wx.offHide()
+        swan.offHide()
     }
 
     /**分享 */
     onShareAppMessage(listener) {
-        wx.onShareAppMessage(listener)
+        swan.onShareAppMessage(listener)
     }
     shareAppMessage(params) {
-        wx.shareAppMessage(params)
+        swan.shareAppMessage(params)
     }
     getShareInfo(params) {
-        wx.getShareInfo(params)
+        swan.getShareInfo(params)
     }
 
     setKeepScreenOn() {
-        wx.setKeepScreenOn({
+        swan.setKeepScreenOn({
             keepScreenOn: true,
             success() { },
             fail() { }
         })
     }
     getSystemInfoSync() {
-        return wx.getSystemInfoSync()
+        return swan.getSystemInfoSync()
     }
     getUpdateManager(): UpdateManager {
         return new UpdateManager()
@@ -78,33 +73,33 @@ export default class Platform implements PlatformInterface {
 
     /**小程序跳转 */
     navigateToMiniProgram(params) {
-        wx.navigateToMiniProgram(params)
+        swan.navigateToMiniProgram(params)
     }
     exit(params) {
-        wx.exitMiniProgram({})
+        swan.exit({})
     }
 
     /**声音 */
     onAudioInterruptionBegin(listener) {
-        wx.onAudioInterruptionBegin(listener)
+        swan.onAudioInterruptionBegin(listener)
     }
     onAudioInterruptionEnd(listener) {
-        wx.onAudioInterruptionEnd(listener)
+        swan.onAudioInterruptionEnd(listener)
     }
     /**network */
     onNetworkStatusChange(listener) {
-        wx.onNetworkStatusChange(listener)
+        swan.onNetworkStatusChange(listener)
     }
     offNetworkStatusChange(listener) {
-        wx.offNetworkStatusChange(listener)
+        swan.offNetworkStatusChange(listener)
     }
     getNetworkType(params) {
-        wx.getNetworkType(params)
+        swan.getNetworkType(params)
     }
 
     /**支付 */
     requestPayment(params) {
-        wx.requestMidasPayment({
+        swan.requestMidasPayment({
             mode: "game",
             env: 0,
             offerId: params.offerId,
@@ -163,22 +158,22 @@ export default class Platform implements PlatformInterface {
 
     /**Toast */
     showLoading(params) {
-        wx.showLoading(params)
+        swan.showLoading(params)
     }
     hideLoading(params) {
-        wx.hideLoading()
+        swan.hideLoading()
     }
     showToast(params) {
-        wx.showToast(params)
+        swan.showToast(params)
     }
     hideToast(params) {
-        wx.hideToast()
+        swan.hideToast()
     }
     showModal(params) {
-        wx.showModal(params)
+        swan.showModal(params)
     }
     showActionSheet(params) {
-        wx.showActionSheet(params)
+        swan.showActionSheet(params)
     }
 
     /**广告 */
@@ -193,16 +188,16 @@ export default class Platform implements PlatformInterface {
     }
     /**微信特有方法 */
     setUserCloudStorage(params) {
-        wx.setUserCloudStorage(params)
+        swan.setUserCloudStorage(params)
     }
     openCustomerServiceConversation() {
-        wx.openCustomerServiceConversation()
+        swan.openCustomerServiceConversation()
     }
     previewImage(params) {
-        wx.previewImage(params)
+        swan.previewImage(params)
     }
     setClipboardData(params) {
-        wx.setClipboardData(params)
+        swan.setClipboardData(params)
     }
 }
 

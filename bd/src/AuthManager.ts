@@ -29,37 +29,26 @@ export default class AuthManager {
             UIConfig.closeDialogOnSide = false
             let alert = new AuthUserInfoDialog(params.isNecessary);
             alert.onReceiveUserInfo = function (res) {
-                if(res.userInfo){
-                  /*   DataCenter.userInfoAuth=true;
-                    DataCenter.user.avstar=res.userInfo.avatarUrl;
-                    DataCenter.user.nickname=res.userInfo.nickName;
-                    NotificationCenter.postNotification(`AuthOK`);
-                    PaoYa.Request.POST('update_profile', { icon_big: res.userInfo.avatarUrl, name: res.userInfo.nickName }, () => {
-                        params.next&&params.next();
-                     }) */
-                     params.success&&params.success(res);
-                }
-                if(!params.isNecessary&&!res.userInfo){
-                    params.next&&params.next();
-                }
+                if (res.userInfo.nickName=='百度网友') {
+                    return
+                  }
+                  if (res.userInfo) {
+                      params.success && params.success(res);
+                  }
+                  if (!params.isNecessary && !res.userInfo) {
+                      params.next && params.next();
+                  }
             }
             alert.popup(true, false)
         }
         let okHandler = function () {
-            wx.openSetting({
+            swan.openSetting({
                 success(res) {
                     let result = res.authSetting[params.scope];
                     //params.next && params.next();
                     if(!params.isNecessary&&!result){params.next && params.next();return;}
                     if (result) {
                         AuthManager.getUserInfo((res)=>{
-                           /*  DataCenter.userInfoAuth=true;
-                            DataCenter.user.avstar=res.userInfo.avatarUrl;
-                            DataCenter.user.nickname=res.userInfo.nickName;
-                            NotificationCenter.postNotification(`AuthOK`);
-                            PaoYa.Request.POST('update_profile', { icon_big: res.userInfo.avatarUrl, name: res.userInfo.nickName }, () => {
-                                params.next&&params.next();
-                             }) */
                              params.success&&params.success(res);
                         })
                     } else {
@@ -71,8 +60,9 @@ export default class AuthManager {
                 }
             })
         }
-        wx.getSetting({
+        swan.getSetting({
             success(res) {
+                console.error(res);
                 let result = res.authSetting[params.scope];
                 if (result == undefined) { //没有获取过权限
                     /**如果请求用户权限失败，则直接return */
@@ -80,7 +70,7 @@ export default class AuthManager {
                         params.fail && params.fail()
                         return
                     }
-                    wx.authorize({
+                    swan.authorize({
                         scope: params.scope,
                         success(res) {
                             params.next && params.next();
@@ -100,7 +90,7 @@ export default class AuthManager {
     }
      /**调用微信获取用户信息接口 */
      static getUserInfo(cb) {
-        wx.getUserInfo({
+        swan.getUserInfo({
             withCredentials: true,
             lang: "zh_CN",
             success(res) {
@@ -124,6 +114,6 @@ export default class AuthManager {
             },
             fail() { }
         }
-        wx.showModal(params)
+        swan.showModal(params)
     }
 }

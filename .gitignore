@@ -1,12 +1,12 @@
 
-./bd/node_modules/
-./bd/dist/
-./browser/node_modules/
-./browser/dist/
-./qq/node_modules/
-./qq/dist/
-./wx/node_modules/
-./wx/dist/
+bd/node_modules/
+bd/dist/
+browser/node_modules/
+browser/dist/
+qq/node_modules/
+qq/dist/
+wx/node_modules/
+wx/dist/
 
 
 
